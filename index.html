@@ -1,0 +1,69 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsip Eksistensi</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            cursor: pointer;
+            user-select: none;
+        }
+        #status {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            animation: pulse 2s infinite;
+            text-align: center;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+        .timeline-text {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="status">[ KLIK LAYAR HP UNTUK MEMULAI KOSMOS ]</div>
+    </div>
+    <script>
+        const app = document.getElementById('app');
+        let step = 0;
+        app.addEventListener('click', () => {
+            if (step === 0) {
+                app.innerHTML = '<div class="timeline-text" style="color: #ff3333; font-size: 2.5rem;">* BIG BANG *</div>';
+                step++;
+            } else if (step === 1) {
+                app.innerHTML = '<div class="timeline-text" style="color: #44aaff;">Membentuk Bumi...<br><span style="font-size: 1rem; color: #888;">Time-lapse: 4,5 Miliar Tahun Berlalu</span></div>';
+                step++;
+            } else if (step === 2) {
+                app.innerHTML = `
+                    <div class="timeline-text">
+                        <span style="color: #00ffcc;">19 AGUSTUS 2008</span><br>
+                        <span style="font-size: 1.5rem;">Perjalanan Jiwa Dimulai.</span>
+                    </div>
+                `;
+                step++;
+            } else {
+                app.innerHTML = '<div id="status">[ Bersambung ke Umur Selanjutnya... Belajar Koding Dulu! ]</div>';
+                step = 0;
+            }
+        });
+    </script>
+</body>
+</html>
