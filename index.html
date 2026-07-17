@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arsip Eksistensi x RPG Kehidupan</title>
     <style>
-        /* Gaya Dasar Kosmik & Monospace */
         body {
             background-color: #08080c;
             color: #f0f0f5;
@@ -19,513 +18,63 @@
             padding: 20px 0;
             box-sizing: border-box;
         }
-
-        #app {
-            width: 95%;
-            max-width: 800px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        /* Animasi Awal */
-        .pulse {
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            animation: pulse 2.5s infinite;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        .timeline-text {
-            font-size: 1.8rem;
-            font-weight: bold;
-            line-height: 1.6;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        /* Container Card */
-        .card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Navigasi Roti (Breadcrumbs) */
-        .breadcrumbs {
-            font-size: 0.75rem;
-            color: #888;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .breadcrumbs span {
-            color: #00ffcc;
-        }
-
-        /* Tipografi */
-        h1 {
-            font-size: 1.8rem;
-            margin: 0 0 10px 0;
-            color: #44aaff;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: #ffb300;
-            margin: 0 0 15px 0;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        p {
-            line-height: 1.6;
-            color: #ccc;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-        }
-
-        /* Grid Sistem untuk Pilihan Banyak (Multi-Column) */
-        .btn-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        /* Desain Tombol Pilihan */
-        .btn {
-            background: rgba(255, 255, 255, 0.02);
-            color: #e0e0e5;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 14px 16px;
-            font-family: inherit;
-            font-size: 0.85rem;
-            text-align: left;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .btn:hover {
-            background: rgba(0, 255, 204, 0.08);
-            border-color: #00ffcc;
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 255, 204, 0.15);
-        }
-
-        .btn::after {
-            content: "➔";
-            font-size: 0.8rem;
-            opacity: 0.5;
-            transition: transform 0.25s;
-        }
-
-        .btn:hover::after {
-            transform: translateX(4px);
-            opacity: 1;
-        }
-
-        /* Tombol Navigasi Bawah */
-        .nav-footer {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 20px;
-        }
-
-        .btn-control {
-            flex: 1;
-            padding: 12px;
-            font-family: inherit;
-            font-size: 0.9rem;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.25s;
-        }
-
-        .btn-back {
-            background: rgba(255, 50, 50, 0.05);
-            color: #ff5555;
-            border: 1px solid rgba(255, 50, 50, 0.25);
-        }
-
-        .btn-back:hover {
-            background: rgba(255, 50, 50, 0.15);
-            border-color: #ff3333;
-        }
-
-        .btn-home {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-home:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Responsif Mobile */
-        @media (max-width: 600px) {
-            .btn-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-footer {
-                flex-direction: column;
-            }
-        }
+        #app { width: 95%; max-width: 800px; padding: 10px; box-sizing: border-box; }
+        .pulse { font-size: 1.1rem; letter-spacing: 3px; animation: pulse 2.5s infinite; cursor: pointer; text-align: center; }
+        @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+        .timeline-text { font-size: 1.8rem; font-weight: bold; line-height: 1.6; cursor: pointer; text-align: center; }
+        .card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 30px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px); animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .breadcrumbs { font-size: 0.75rem; color: #888; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .breadcrumbs span { color: #00ffcc; }
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: #44aaff; }
+        .subtitle { font-size: 0.9rem; color: #ffb300; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 1.5px; }
+        p { line-height: 1.6; color: #ccc; font-size: 0.95rem; margin-bottom: 25px; }
+        .btn-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 20px; }
+        .btn { background: rgba(255, 255, 255, 0.02); color: #e0e0e5; border: 1px solid rgba(255, 255, 255, 0.15); padding: 14px 16px; font-family: inherit; font-size: 0.85rem; text-align: left; border-radius: 6px; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; justify-content: space-between; }
+        .btn:hover { background: rgba(0, 255, 204, 0.08); border-color: #00ffcc; color: #fff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 255, 204, 0.15); }
+        .btn::after { content: "➔"; font-size: 0.8rem; opacity: 0.5; transition: transform 0.25s; }
+        .btn:hover::after { transform: translateX(4px); opacity: 1; }
+        .nav-footer { display: flex; gap: 15px; margin-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 20px; }
+        .btn-control { flex: 1; padding: 12px; font-family: inherit; font-size: 0.9rem; border-radius: 6px; cursor: pointer; text-align: center; transition: all 0.25s; }
+        .btn-back { background: rgba(255, 50, 50, 0.05); color: #ff5555; border: 1px solid rgba(255, 50, 50, 0.25); }
+        .btn-back:hover { background: rgba(255, 50, 50, 0.15); border-color: #ff3333; }
+        .btn-home { background: rgba(255, 255, 255, 0.05); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .btn-home:hover { background: rgba(255, 255, 255, 0.15); }
+        @media (max-width: 600px) { .btn-grid { grid-template-columns: 1fr; } .nav-footer { flex-direction: column; } }
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- FASE 1: INTRO TIMELINE -->
-        <div id="intro-container" class="pulse" onclick="nextIntroStep()">
-            [ KLIK LAYAR UNTUK MEMULAI KOSMOS ]
-        </div>
+        <div id="intro-container" class="pulse"> [ KLIK LAYAR UNTUK MEMULAI KOSMOS ] </div>
     </div>
 
-    <script>
+    <!-- MENGGUNAKAN TYPE=MODULE SUPAYA BISA IMPORT DATA SECARA EFISIEN -->
+    <script type="module">
+        import { treeData } from './data.js';
+
         const app = document.getElementById('app');
-        
-        // --- FASE 1: TIMELINE INTRO ---
         let introStep = 0;
-        function nextIntroStep() {
+
+        window.nextIntroStep = function() {
             introStep++;
             if (introStep === 1) {
                 app.innerHTML = `<div class="timeline-text" style="color: #ff3333; font-size: 2.2rem;" onclick="nextIntroStep()">* BIG BANG *</div>`;
             } else if (introStep === 2) {
-                app.innerHTML = `
-                    <div class="timeline-text" onclick="nextIntroStep()">
-                        <span style="color: #44aaff;">Membentuk Bumi...</span><br>
-                        <span style="font-size: 1rem; color: #888;">Time-lapse: 4,5 Miliar Tahun Berlalu</span>
-                    </div>`;
+                app.innerHTML = `<div class="timeline-text" onclick="nextIntroStep()"><span style="color: #44aaff;">Membentuk Bumi...</span><br><span style="font-size: 1rem; color: #888;">Time-lapse: 4,5 Miliar Tahun Berlalu</span></div>`;
             } else if (introStep === 3) {
-                app.innerHTML = `
-                    <div class="timeline-text" onclick="nextIntroStep()">
-                        <span style="color: #00ffcc;">19 AGUSTUS 2008</span><br>
-                        <span style="font-size: 1.4rem; color: #fff;">Perjalanan Jiwa Dimulai.</span>
-                    </div>`;
+                app.innerHTML = `<div class="timeline-text" onclick="nextIntroStep()"><span style="color: #00ffcc;">19 AGUSTUS 2008</span><br><span style="font-size: 1.4rem; color: #fff;">Perjalanan Jiwa Dimulai.</span></div>`;
             } else {
-                initPortfolio();
+                renderState("root");
             }
-        }
-
-        // --- FASE 2: DATA POHON KEPUTUSAN MASIF (PORTFOLIO + GAME RPG) ---
-        const treeData = {
-            // === LEVEL 0: ROOT ===
-            root: {
-                title: "ARSIP EKSISTENSI",
-                subtitle: "Sistem Navigasi Utama",
-                description: "Selamat datang di ruang kendali eksistensi. Dari sini, kamu bisa melacak percabangan keputusan hidup, keahlian portofolio, atau masuk ke dalam simulator RPG Realitas.",
-                pathString: "Arsip",
-                choices: [
-                    { text: "🧭 Jalur Pilihan Hidup (The Path)", target: "path_menu" },
-                    { text: "🛠️ Stasiun Keahlian & Teknologi", target: "skills_menu" },
-                    { text: "🎮 Mulai Game RPG Kehidupan", target: "rpg_root" }
-                ],
-                isRoot: true
-            },
-
-            // ========================================================
-            // === BLOK PORTFOLIO (DARI KODE SEBELUMNYA) ===
-            // ========================================================
-            path_menu: {
-                title: "PERSIMPANGAN JALUR HIDUP",
-                subtitle: "Kategori Utama - Alur Realitas",
-                description: "Pilar penyeimbang eksistensi: Logika Analitis dan Kebebasan Kreatif.",
-                pathString: "Arsip > Jalur Hidup",
-                parent: "root",
-                choices: [
-                    { text: "📚 Eksplorasi Sains & Akademik", target: "science_category" },
-                    { text: "🎨 Eksplorasi Kreatif & Desain", target: "creative_category" }
-                ]
-            },
-            skills_menu: {
-                title: "STASIUN KEAHLIAN",
-                subtitle: "Kategori Utama - Arsenal Tempur",
-                description: "Kumpulan tools dan bahasa pemrograman yang dipelajari untuk merekayasa masa depan.",
-                pathString: "Arsip > Keahlian",
-                parent: "root",
-                choices: [
-                    { text: "💻 Kode & Logika (Programming)", target: "coding_sub" }
-                ]
-            },
-            science_category: {
-                title: "LOGIKA & SAINS",
-                subtitle: "Sub-Kategori - Eksplorasi Ilmiah",
-                description: "Menyelami hukum semesta. Pilih sub-kategori untuk melihat teori yang sedang didalami.",
-                pathString: "Arsip > Jalur Hidup > Sains",
-                parent: "path_menu",
-                choices: [
-                    { text: "☕ Neurofarmakologi Kafein", target: "caffeine_deep" }
-                ]
-            },
-            caffeine_deep: {
-                title: "NEUROFARMAKOLOGI KAFEIN",
-                subtitle: "Detail Seluler",
-                description: "Kafein menyamar sebagai molekul adenosin untuk menempel pada reseptor sel saraf di otak, sehingga mencegah rasa kantuk masuk secara biologis.",
-                pathString: "Arsip > Jalur Hidup > Sains > Kafein",
-                parent: "science_category",
-                choices: []
-            },
-            creative_category: {
-                title: "SENI VISUAL & DESAIN",
-                subtitle: "Sub-Kategori - Kreatif",
-                description: "Mendesain ilustrasi tokoh fiktif dengan gaya gambar kartun 2D yang bersih dan konsisten.",
-                pathString: "Arsip > Jalur Hidup > Kreatif",
-                parent: "path_menu",
-                choices: []
-            },
-            coding_sub: {
-                title: "BAHASA MESIN",
-                subtitle: "Sub-Kategori - Frontend",
-                description: "Menguasai HTML, CSS, dan JavaScript dasar untuk membangun platform interaktif.",
-                pathString: "Arsip > Keahlian > Coding",
-                parent: "skills_menu",
-                choices: []
-            },
-
-            // ========================================================
-            // === BLOK BARU: GAME RPG KEHIDUPAN (DECISION TREE RPG) ===
-            // ========================================================
-            
-            // --- LEVEL 1 GAME: PILIH RAS ---
-            rpg_root: {
-                title: "CHARACTER CREATION",
-                subtitle: "Fase 1 - Pilih Ras Jiwamu",
-                description: "Di dunia fantasi ini, takdirmu ditentukan dari bentuk fisik awal. Setiap ras memiliki keunikan biologis dan sosiologis masing-masing. Pilih dengan bijak!",
-                pathString: "Arsip > RPG Game",
-                parent: "root",
-                choices: [
-                    { text: "🧑 Ras Manusia (Human)", target: "rpg_human" },
-                    { text: "👹 Ras Monster (Beast/Fiend)", target: "rpg_monster" },
-                    { text: "🧝 Ras Elf (Ancient Blood)", target: "rpg_elf" },
-                    { text: "🧔 Ras Dwarf (Mountain Clan)", target: "rpg_dwarf" }
-                ]
-            },
-
-            // --- LEVEL 2 GAME: PILIH ROLE/CLASS BERDASARKAN RAS ---
-            
-            // 1. Cabang Manusia
-            rpg_human: {
-                title: "RAS MANUSIA",
-                subtitle: "Fase 2 - Pilih Kelas/Pekerjaan",
-                description: "Ras yang paling adaptif dengan pertumbuhan tercepat di dunia. Peradaban manusia dibangun di atas ilmu sihir, taktik militer, dan perdagangan ekonomi.",
-                pathString: "Arsip > RPG Game > Manusia",
-                parent: "rpg_root",
-                choices: [
-                    { text: "⚔️ Kesatria Pedang (Knight)", target: "rpg_human_knight" },
-                    { text: "🧙 Penyihir Agung (Mage)", target: "rpg_human_mage" },
-                    { text: "💰 Pedagang Antar Dimensi (Merchant)", target: "rpg_human_merchant" }
-                ]
-            },
-
-            // 2. Cabang Monster
-            rpg_monster: {
-                title: "RAS MONSTER",
-                subtitle: "Fase 2 - Pilih Keturunan Binatang",
-                description: "Mengutamakan kekuatan fisik mentah, insting berburu, dan manipulasi elemen alam. Ditakuti oleh ras-ras lemah.",
-                pathString: "Arsip > RPG Game > Monster",
-                parent: "rpg_root",
-                choices: [
-                    { text: "🟢 Goblin (Shadow Thief)", target: "rpg_monster_goblin" },
-                    { text: "🐗 Orc (Brutal Berserker)", target: "rpg_monster_orc" },
-                    { text: "🐉 Setengah Naga (Dragonoid)", target: "rpg_monster_dragonoid" }
-                ]
-            },
-
-            // 3. Cabang Elf
-            rpg_elf: {
-                title: "RAS ELF",
-                subtitle: "Fase 2 - Pilih Aliran Spiritual",
-                description: "Makhluk berumur panjang yang hidup selaras dengan alam gaib dan memiliki akurasi indra yang luar biasa.",
-                pathString: "Arsip > RPG Game > Elf",
-                parent: "rpg_root",
-                choices: [
-                    { text: "🏹 Pemanah Angin (Wind Ranger)", target: "rpg_elf_ranger" },
-                    { text: "🌿 Penyembuh Druid (Nature Druid)", target: "rpg_elf_druid" }
-                ]
-            },
-
-            // 4. Cabang Dwarf
-            rpg_dwarf: {
-                title: "RAS DWARF",
-                subtitle: "Fase 2 - Pilih Keahlian Tempa",
-                description: "Penghuni bawah gunung. Bertubuh pendek namun kekar, terkenal sebagai arsitek dan pembuat senjata legendaris.",
-                pathString: "Arsip > RPG Game > Dwarf",
-                parent: "rpg_root",
-                choices: [
-                    { text: "🔨 Penempa Besi (Blacksmith)", target: "rpg_dwarf_smith" },
-                    { text: "🛡️ Penjaga Benteng (Shield Warden)", target: "rpg_dwarf_warden" }
-                ]
-            },
-
-            // --- LEVEL 3 GAME: SUB-SUB PILIHAN (SPESIALISASI SENJATA / DETAIL AKHIR) ---
-
-            // Sub-sub Cabang Manusia Kesatria
-            rpg_human_knight: {
-                title: "SPESIALISASI KESATRIA",
-                subtitle: "Fase 3 - Pilih Gaya Bertarung",
-                description: "Bagaimana caramu mengayunkan besi dan mempertahankan kehormatan di medan perang?",
-                pathString: "Arsip > RPG Game > Manusia > Kesatria",
-                parent: "rpg_human",
-                choices: [
-                    { text: "🗡️ Longsword (Pedang Panjang klasik)", target: "spec_human_longsword" },
-                    { text: "⚔️ Dual Blade (Gaya Dua Pedang cepat)", target: "spec_human_dual" },
-                    { text: "👥 Assassin (Mengendap dari bayangan)", target: "spec_human_assassin" }
-                ]
-            },
-
-            // ========================================================
-            // === LEVEL 4: RINCIAN STATUS AKHIR (LEAF NODE / END STATS) ===
-            // ========================================================
-            
-            // Rincian Akhir Kesatria - Longsword
-            spec_human_longsword: {
-                title: "KESATRIA PEDANG PANJANG (LONGSWORD)",
-                subtitle: "Spesifikasi Karakter Final",
-                description: `
-                    <strong>[ STATUS DASAR ]</strong><br>
-                    ❤️ TOTAL HP : 850 / 850 (Tebal)<br>
-                    💧 TOTAL MP : 150 / 150 (Rendah)<br><br>
-                    <strong>[ KEUNGGULAN ]</strong><br>
-                    + Keseimbangan yang sangat baik antara daya serang dan pertahanan.<br>
-                    + Memiliki jangkauan tebasan area yang luas.<br><br>
-                    <strong>[ KEKURANGAN ]</strong><br>
-                    - Kecepatan serang tergolong lambat karena bobot pedang.<br>
-                    - Sangat bergantung pada stamina fisik, tidak memiliki sihir jarak jauh.
-                `,
-                pathString: "Arsip > RPG > Manusia > Kesatria > Longsword",
-                parent: "rpg_human_knight",
-                choices: []
-            },
-
-            // Rincian Akhir Kesatria - Dual Blade
-            spec_human_dual: {
-                title: "KESATRIA DUA PEDANG (DUAL BLADE)",
-                subtitle: "Spesifikasi Karakter Final",
-                description: `
-                    <strong>[ STATUS DASAR ]</strong><br>
-                    ❤️ TOTAL HP : 600 / 600 (Sedang)<br>
-                    💧 TOTAL MP : 200 / 200 (Sedang)<br><br>
-                    <strong>[ KEUNGGULAN ]</strong><br>
-                    + DPS (Damage per Second) sangat tinggi berkat serangan bertubi-tubi.<br>
-                    + Mobilitas dan kemampuan menghindar (evade) sangat lincah.<br><br>
-                    <strong>[ KEKURANGAN ]</strong><br>
-                    - Tidak bisa menggunakan perisai, membuatnya rentan terkena counter attack.<br>
-                    - Daya rusak per satu kali tebasan kecil.
-                `,
-                pathString: "Arsip > RPG > Manusia > Kesatria > Dual Blade",
-                parent: "rpg_human_knight",
-                choices: []
-            },
-
-            // Rincian Akhir Kesatria - Assassin
-            spec_human_assassin: {
-                title: "PEMBUNUH BAYANGAN (ASSASSIN)",
-                subtitle: "Spesifikasi Karakter Final",
-                description: `
-                    <strong>[ STATUS DASAR ]</strong><br>
-                    ❤️ TOTAL HP : 450 / 450 (Tipis)<br>
-                    💧 TOTAL MP : 350 / 350 (Tinggi - Untuk skill menghilang)<br><br>
-                    <strong>[ KEUNGGULAN ]</strong><br>
-                    + Serangan kritikal mematikan dari arah belakang (Stealth Backstab).<br>
-                    + Mampu mendeteksi jebakan dan bergerak tanpa suara.<br><br>
-                    <strong>[ KEKURANGAN ]</strong><br>
-                    - Pertahanan fisik sangat lemah, bisa mati dalam beberapa kali pukulan boss.<br>
-                    - Tidak efektif dalam pertempuran terbuka barisan depan.
-                `,
-                pathString: "Arsip > RPG > Manusia > Kesatria > Assassin",
-                parent: "rpg_human_knight",
-                choices: []
-            },
-
-            // Rincian Akhir Manusia - Penyihir Agung
-            rpg_human_mage: {
-                title: "PENYIHIR AGUNG (MAGE)",
-                subtitle: "Spesifikasi Karakter Final",
-                description: `
-                    <strong>[ STATUS DASAR ]</strong><br>
-                    ❤️ TOTAL HP : 350 / 350 (Sangat Tipis)<br>
-                    💧 TOTAL MP : 1200 / 1200 (Sangat Melimpah)<br><br>
-                    <strong>[ KEUNGGULAN ]</strong><br>
-                    + Menghancurkan pasukan musuh dari jarak jauh dengan sihir elemen (Api/Petir).<br>
-                    + Kapasitas energi (MP) terbesar untuk cast mantra terus-menerus.<br><br>
-                    <strong>[ KEKURANGAN ]</strong><br>
-                    - Membutuhkan waktu merapal mantra (casting time), menyebabkannya mudah diganggu musuh.<br>
-                    - Pertahanan fisik nol besar jika didekati petarung jarak dekat.
-                `,
-                pathString: "Arsip > RPG > Manusia > Mage",
-                parent: "rpg_human",
-                choices: []
-            },
-
-            // Rincian Akhir Monster - Setengah Naga
-            rpg_monster_dragonoid: {
-                title: "SETENGAH NAGA (DRAGONOID)",
-                subtitle: "Spesifikasi Karakter Final",
-                description: `
-                    <strong>[ STATUS DASAR ]</strong><br>
-                    ❤️ TOTAL HP : 1500 / 1500 (Raksasa)<br>
-                    💧 TOTAL MP : 500 / 500 (Sedang)<br><br>
-                    <strong>[ KEUNGGULAN ]</strong><br>
-                    + Kebal terhadap serangan elemen api dan memiliki kulit sisik sekeras baja.<br>
-                    + Memiliki serangan pamungkas napas naga (Dragon Breath) berskala masif.<br><br>
-                    <strong>[ KEKURANGAN ]</strong><br>
-                    - Ukuran tubuh besar membuatnya menjadi target empuk serangan musuh.<br>
-                    - Kecepatan regenerasi stamina lebih lambat dibanding ras manusia.
-                ` ,
-                pathString: "Arsip > RPG > Monster > Dragonoid",
-                parent: "rpg_monster",
-                choices: []
-            }
-            
-            // Catatan: Kamu bisa meneruskan cabang isi untuk Goblin, Orc, Merchant, Elf, dan Dwarf 
-            // dengan menyalin format di atas langsung di repository GitHub kamu nanti!
         };
 
-        // --- FASE 3: MESIN PENGENDALI NAVIGASI (STATE ENGINE) ---
-        let currentPathId = "root";
+        // Daftarkan event listener klik awal pada window
+        document.getElementById('intro-container').addEventListener('click', window.nextIntroStep);
 
-        function initPortfolio() {
-            renderState("root");
-        }
-
-        function renderState(stateId) {
-            currentPathId = stateId;
+        window.renderState = function(stateId) {
             const state = treeData[stateId];
-            
-            if (!state) {
-                console.error("ID Cabang Tidak Ditemukan: " + stateId);
-                return;
-            }
+            if (!state) return;
 
-            // 1. Generate Breadcrumbs
-            const breadcrumbHtml = `Jalur: <span>${state.pathString}</span>`;
-
-            // 2. Generate Pilihan Cabang (Jika ada)
             let choicesHtml = "";
             if (state.choices && state.choices.length > 0) {
                 state.choices.forEach(choice => {
@@ -535,32 +84,25 @@
                 choicesHtml = `<p style="color: #888; font-style: italic; text-align: center; width: 100%;">-- Desain Karakter Selesai. Siap Berpetualang di Realitas Semesta. --</p>`;
             }
 
-            // 3. Generate Tombol Navigasi Bawah (Back & Home)
             let controlButtonsHtml = "";
             if (!state.isRoot) {
                 controlButtonsHtml += `<button class="btn-control btn-back" onclick="renderState('${state.parent}')">⬅ KEMBALI SEBELUMNYA</button>`;
                 controlButtonsHtml += `<button class="btn-control btn-home" onclick="renderState('root')">🏠 KE HALAMAN UTAMA</button>`;
             }
 
-            // 4. Render Seluruh Struktur Card ke Layar
             app.innerHTML = `
                 <div class="card">
-                    <div class="breadcrumbs">${breadcrumbHtml}</div>
+                    <div class="breadcrumbs">Jalur: <span>${state.pathString}</span></div>
                     <div class="subtitle">// ${state.subtitle}</div>
                     <h1>${state.title}</h1>
                     <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px;">
                     <p>${state.description}</p>
-                    
-                    <div class="btn-grid">
-                        ${choicesHtml}
-                    </div>
-
+                    <div class="btn-grid">${choicesHtml}</div>
                     ${controlButtonsHtml ? `<div class="nav-footer">${controlButtonsHtml}</div>` : ''}
                 </div>
             `;
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        };
     </script>
 </body>
 </html>
