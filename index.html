@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arsip Eksistensi & Portofolio</title>
+    <title>Arsip Eksistensi - Multi-level Decision Tree</title>
     <style>
-        /* Gaya Dasar Kosmik */
+        /* Gaya Dasar Kosmik & Monospace */
         body {
-            background-color: #0b0b0f;
+            background-color: #08080c;
             color: #f0f0f5;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
@@ -16,23 +16,24 @@
             min-height: 100vh;
             margin: 0;
             overflow-x: hidden;
-            user-select: none;
-        }
-
-        #app {
-            width: 90%;
-            max-width: 600px;
-            text-align: center;
-            padding: 20px;
+            padding: 20px 0;
             box-sizing: border-box;
         }
 
-        /* Status & teks berkedip */
+        #app {
+            width: 95%;
+            max-width: 800px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Animasi Awal */
         .pulse {
             font-size: 1.1rem;
             letter-spacing: 3px;
             animation: pulse 2.5s infinite;
             cursor: pointer;
+            text-align: center;
         }
 
         @keyframes pulse {
@@ -46,85 +47,160 @@
             font-weight: bold;
             line-height: 1.6;
             cursor: pointer;
+            text-align: center;
         }
 
-        /* Gaya Container Profil & Tree */
+        /* Container Card */
         .card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            backdrop-filter: blur(4px);
-            text-align: left;
-            animation: fadeIn 0.8s ease-in-out;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.5s ease-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1, h2, h3 {
-            margin-top: 0;
+        /* Navigasi Roti (Breadcrumbs) */
+        .breadcrumbs {
+            font-size: 0.75rem;
+            color: #888;
+            margin-bottom: 15px;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .highlight-blue { color: #44aaff; }
-        .highlight-cyan { color: #00ffcc; }
-        .highlight-amber { color: #ffb300; }
+        .breadcrumbs span {
+            color: #00ffcc;
+        }
+
+        /* Tipografi */
+        h1 {
+            font-size: 1.8rem;
+            margin: 0 0 10px 0;
+            color: #44aaff;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #ffb300;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
 
         p {
             line-height: 1.6;
             color: #ccc;
             font-size: 0.95rem;
+            margin-bottom: 25px;
         }
 
-        /* Gaya Tombol Pilihan & Navigasi */
-        .btn-container {
-            display: flex;
-            flex-direction: column;
+        /* Grid Sistem untuk Pilihan Banyak (Multi-Column) */
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 12px;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
+        /* Desain Tombol Pilihan */
         .btn {
-            background: transparent;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 12px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            color: #e0e0e5;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 14px 16px;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: left;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 255, 204, 0.08);
             border-color: #00ffcc;
-            transform: translateX(5px);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 255, 204, 0.15);
+        }
+
+        .btn::after {
+            content: "➔";
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: transform 0.25s;
+        }
+
+        .btn:hover::after {
+            transform: translateX(4px);
+            opacity: 1;
+        }
+
+        /* Tombol Navigasi Bawah */
+        .nav-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+        }
+
+        .btn-control {
+            flex: 1;
+            padding: 12px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s;
         }
 
         .btn-back {
-            background: rgba(255, 50, 50, 0.1);
+            background: rgba(255, 50, 50, 0.05);
             color: #ff5555;
-            border: 1px solid rgba(255, 50, 50, 0.3);
-            margin-top: 15px;
-            text-align: center;
+            border: 1px solid rgba(255, 50, 50, 0.25);
         }
 
         .btn-back:hover {
-            background: rgba(255, 50, 50, 0.2);
+            background: rgba(255, 50, 50, 0.15);
             border-color: #ff3333;
-            transform: none;
+        }
+
+        .btn-home {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-home:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Responsif Mobile */
+        @media (max-width: 600px) {
+            .btn-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-footer {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <!-- Fase 1: Intro Timeline Kosmik (Interaksi klik di mana saja) -->
+        <!-- FASE 1: INTRO TIMELINE -->
         <div id="intro-container" class="pulse" onclick="nextIntroStep()">
             [ KLIK LAYAR UNTUK MEMULAI KOSMOS ]
         </div>
@@ -138,98 +214,223 @@
         function nextIntroStep() {
             introStep++;
             if (introStep === 1) {
-                app.innerHTML = `
-                    <div id="intro-container" class="timeline-text" style="color: #ff3333; font-size: 2.2rem;" onclick="nextIntroStep()">
-                        * BIG BANG *
-                    </div>`;
+                app.innerHTML = `<div class="timeline-text" style="color: #ff3333; font-size: 2.2rem;" onclick="nextIntroStep()">* BIG BANG *</div>`;
             } else if (introStep === 2) {
                 app.innerHTML = `
-                    <div id="intro-container" class="timeline-text" onclick="nextIntroStep()">
+                    <div class="timeline-text" onclick="nextIntroStep()">
                         <span style="color: #44aaff;">Membentuk Bumi...</span><br>
                         <span style="font-size: 1rem; color: #888;">Time-lapse: 4,5 Miliar Tahun Berlalu</span>
                     </div>`;
             } else if (introStep === 3) {
                 app.innerHTML = `
-                    <div id="intro-container" class="timeline-text" onclick="nextIntroStep()">
+                    <div class="timeline-text" onclick="nextIntroStep()">
                         <span style="color: #00ffcc;">19 AGUSTUS 2008</span><br>
                         <span style="font-size: 1.4rem; color: #fff;">Perjalanan Jiwa Dimulai.</span>
                     </div>`;
             } else {
-                // Selesai intro, masuk ke Fase 2 (Profil & Tree)
                 initPortfolio();
             }
         }
 
-        // --- FASE 2: INPUT DATA POHON PILIHAN (TREE DATA) ---
-        // Kamu bisa memodifikasi atau menambah pilihan hidup di sini sesukamu.
+        // --- FASE 2: DATA POHON KEPUTUSAN MASIF (TREE DATA) ---
+        // Struktur: id_node: { title, subtitle, description, pathString, parent, choices: [{text, target}] }
         const treeData = {
-            // Halaman Utama Profil
+            // === LEVEL 0: ROOT ===
             root: {
                 title: "ARSIP EKSISTENSI",
-                subtitle: "Siswa SMA / Tech Enthusiast / Kreator Amatir",
-                description: "Menjelajahi dunia sains, baris kode, dan visualisasi karakter. Berdiri di persimpangan antara logika kalkulus dan imajinasi liar.",
+                subtitle: "Sistem Navigasi Kehidupan",
+                description: "Selamat datang di ruang kendali memori dan pilihan. Dari sini, kamu bisa melacak percabangan keputusan, minat akademik, hingga filosofi seni yang membentuk eksistensi saat ini.",
+                pathString: "Arsip",
                 choices: [
-                    { text: "📁 Lihat Pilihan Jalur Hidup (The Path)", target: "path_menu" },
-                    { text: "🛠️ Intip Skill & Teknologi", target: "skills" }
+                    { text: "🧭 Jalur Pilihan Hidup (The Path)", target: "path_menu" },
+                    { text: "🛠️ Stasiun Keahlian & Teknologi", target: "skills_menu" }
                 ],
                 isRoot: true
             },
-            // Menu Cabang Jalur Hidup
+
+            // === LEVEL 1: KATEGORI UTAMA 1 (JALUR HIDUP) ===
             path_menu: {
-                title: "PILIHAN JALUR HIDUP",
-                subtitle: "Persimpangan Realitas",
-                description: "Hidup adalah kumpulan dari pilihan-pilihan kecil yang bercabang. Ke mana fokus energi saat ini akan bermuara?",
+                title: "PERSIMPANGAN JALUR HIDUP",
+                subtitle: "Kategori Utama - Alur Realitas",
+                description: "Setiap langkah kecil melahirkan percabangan tak terbatas. Di bawah ini adalah dua pilar utama penyeimbang hidup: Logika Analitis dan Kebebasan Kreatif.",
+                pathString: "Arsip > Jalur Hidup",
+                parent: "root",
                 choices: [
-                    { text: "📚 Jalur Akademik & Analitis (Sains/Fisika/IT)", target: "path_academic" },
-                    { text: "🎨 Jalur Kreatif & Seni Visual", target: "path_creative" }
-                ],
-                parent: "root"
+                    { text: "📚 01. Eksplorasi Sains & Akademik", target: "science_category" },
+                    { text: "🎨 02. Eksplorasi Kreatif & Desain", target: "creative_category" }
+                ]
             },
-            // Cabang Akademik (Lvl 2)
-            path_academic: {
-                title: "LOGIKA & SAINS",
-                subtitle: "Mencari Kepastian di Semesta yang Acak",
-                description: "Tertarik pada bagaimana alam bekerja. Mulai dari mekanika klasik, hukum termodinamika, hingga logika pemrograman Python dan Web. Jalur ini menuntut dedikasi tinggi dan kopi yang cukup.",
+
+            // === LEVEL 1: KATEGORI UTAMA 2 (SKILLS) ===
+            skills_menu: {
+                title: "STASIUN KEAHLIAN",
+                subtitle: "Kategori Utama - Arsenal Tempur",
+                description: "Kumpulan tools, bahasa pemrograman, dan metodologi yang dipelajari untuk merekayasa masa depan dan memecahkan masalah nyata.",
+                pathString: "Arsip > Keahlian",
+                parent: "root",
                 choices: [
-                    { text: "⚛️ Eksplorasi Topik Sains yang Disukai", target: "science_detail" }
-                ],
-                parent: "path_menu"
+                    { text: "💻 Kode & Logika (Programming)", target: "coding_sub" },
+                    { text: "🧮 Matematika Terapan & Analisis", target: "math_sub" }
+                ]
             },
-            science_detail: {
-                title: "Sains: Dari Kafein Hingga Kosmos",
-                subtitle: "Katalog Pengetahuan",
-                description: "Saat ini sedang mendalami bagaimana kafein memblokir adenosin di otak untuk mempertahankan fokus, sembari membedah persamaan gerak fisika. Pengetahuan adalah jangkar eksistensial.",
-                choices: [],
-                parent: "path_academic"
-            },
-            // Cabang Kreatif (Lvl 2)
-            path_creative: {
-                title: "VISUAL & IMAJINASI",
-                subtitle: "Melawan Kebosanan dengan Kanvas Digital",
-                description: "Sisi kanan otak yang menolak diam. Fokus pada pembuatan ilustrasi karakter 2D dengan gaya kartun yang bersih, tanpa elemen distopia yang berlebihan. Seni adalah cara mengabadikan pikiran.",
+
+            // === LEVEL 2: SUB-KATEGORI (SAINS) ===
+            science_category: {
+                title: "LOGIKA, FISIKA, & BIOLOGI",
+                subtitle: "Sub-Kategori - Eksplorasi Ilmiah",
+                description: "Menyelami hukum-hukum semesta yang mutlak. Silakan pilih sub-sub kategori di bawah untuk melihat teori mendalam yang sedang dieksplorasi.",
+                pathString: "Arsip > Jalur Hidup > Sains",
+                parent: "path_menu",
                 choices: [
-                    { text: "🎨 Filosofi Ilustrasi Kartun", target: "art_detail" }
-                ],
-                parent: "path_menu"
+                    { text: "☕ Neurofarmakologi Kafein", target: "caffeine_deep" },
+                    { text: "🔥 Termodinamika & Kalor", target: "thermo_deep" },
+                    { text: "🌌 Kinematika & Gerak Semesta", target: "kinematics_deep" },
+                    { text: "📖 Sejarah Kolonial & Dampak Sosial", target: "history_deep" }
+                ]
             },
-            art_detail: {
-                title: "Filosofi Desain",
-                subtitle: "Estetika Garis dan Karakter",
-                description: "Menyukai ilustrasi kartun yang solid dan rapi. Bagi saya, karakter yang baik adalah karakter yang memiliki konsistensi detail—mulai dari struktur pakaian hingga ekspresi wajah.",
-                choices: [],
-                parent: "path_creative"
+
+            // === LEVEL 2: SUB-KATEGORI (KREATIF) ===
+            creative_category: {
+                title: "SENI VISUAL & DESAIN",
+                subtitle: "Sub-Kategori - Katarsis Imajinatif",
+                description: "Menyeimbangkan otak kiri yang penuh angka dengan estetika visual garis tipis dan karakter kartun fiksi tanpa batasan.",
+                pathString: "Arsip > Jalur Hidup > Kreatif",
+                parent: "path_menu",
+                choices: [
+                    { text: "✏️ Pembuatan Karakter 2D Kartun", target: "character_deep" },
+                    { text: "📏 Konsistensi Desain Pakaian", target: "fashion_deep" },
+                    { text: "🚫 Filosofi Seni Tanpa Kekerasan", target: "peace_art_deep" }
+                ]
             },
-            // Cabang Skill (Lvl 1)
-            skills: {
-                title: "STASIUN UTAMA",
-                subtitle: "Teknologi & Alat Tempur",
-                description: "Sedang dalam proses menguasai dasar-dasar pengembangan web (HTML/CSS/JS) untuk membangun platform interaktif, serta menggunakan logika matematika matriks untuk problem solving.",
-                choices: [],
-                parent: "root"
-            }
+
+            // === LEVEL 2: SUB-KATEGORI (CODING) ===
+            coding_sub: {
+                title: "BAHASA MESIN & ALGORITMA",
+                subtitle: "Sub-Kategori - Rekayasa Perangkat Lunak",
+                description: "Menerjemahkan ide abstrak menjadi instruksi biner yang dapat dieksekusi oleh mesin.",
+                pathString: "Arsip > Keahlian > Coding",
+                parent: "skills_menu",
+                choices: [
+                    { text: "🌐 Frontend Web (HTML/CSS/JS)", target: "frontend_deep" },
+                    { text: "🐍 Logika Python & Data Science", target: "python_deep" }
+                ]
+            },
+
+            // === LEVEL 2: SUB-KATEGORI (MATEMATIKA) ===
+            math_sub: {
+                title: "STRUKTUR MATEMATIKA",
+                subtitle: "Sub-Kategori - Pondasi Berpikir",
+                description: "Matematika bukanlah tentang menghitung angka cepat, melainkan melatih pola pikir runut untuk memecahkan ketidakpastian.",
+                pathString: "Arsip > Keahlian > Matematika",
+                parent: "skills_menu",
+                choices: [
+                    { text: "📐 Teori Matriks & Sistem Persamaan", target: "matrix_deep" },
+                    { text: "📈 Analisis Regresi & Prediksi Data", target: "regression_deep" }
+                ]
+            },
+
+            // === LEVEL 3: SUB-SUB-KATEGORI (PILIHAN DETAIL / DAFTAR BANYAK) ===
+            // 1. Cabang Kafein (Ada 5 Contoh Pilihan Bersarang Lagi di Sini)
+            caffeine_deep: {
+                title: "NEUROFARMAKOLOGI KAFEIN",
+                subtitle: "Sub-Sub-Kategori - Kimia Tubuh",
+                description: "Mempelajari bagaimana zat kimia harian mempengaruhi kognisi dan fokus belajar di sekolah.",
+                pathString: "Arsip > Jalur Hidup > Sains > Kafein",
+                parent: "science_category",
+                choices: [
+                    { text: "🧠 Adenosin Reseptor Antagonis (Mekanisme)", target: "caffeine_mechanism" },
+                    { text: "⏱️ Siklus Paruh Waktu Kafein di Darah", target: "caffeine_half_life" },
+                    { text: "📉 Efek Crash Kafein Sore Hari", target: "caffeine_crash" }
+                ]
+            },
+            caffeine_mechanism: {
+                title: "Mekanisme Pemblokiran Reseptor",
+                subtitle: "Detail Seluler",
+                description: "Kafein menyamar sebagai molekul adenosin (zat pemicu rasa kantuk) untuk menempel pada reseptor sel saraf di otak, sehingga mencegah rasa kantuk masuk secara biologis.",
+                pathString: "Arsip > Jalur Hidup > Sains > Kafein > Mekanisme",
+                parent: "caffeine_deep",
+                choices: []
+            },
+            caffeine_half_life: {
+                title: "Grafik Degradasi Waktu Paruh",
+                subtitle: "Farmakokinetika",
+                description: "Rata-rata kafein bertahan dengan waktu paruh 5 jam di dalam tubuh remaja sebelum akhirnya diproses sepenuhnya oleh organ hati.",
+                pathString: "Arsip > Jalur Hidup > Sains > Kafein > Waktu Paruh",
+                parent: "caffeine_deep",
+                choices: []
+            },
+            caffeine_crash: {
+                title: "Fenomena Kafein Crash",
+                subtitle: "Studi Batas Batas Energi",
+                description: "Saat efek kafein memudar, tumpukan adenosin yang tertahan di luar pintu reseptor akan langsung menyerbu masuk sekaligus, memicu rasa lelah yang ekstrem secara mendadak.",
+                pathString: "Arsip > Jalur Hidup > Sains > Kafein > Crash",
+                parent: "caffeine_deep",
+                choices: []
+            },
+
+            // 2. Cabang Termodinamika
+            thermo_deep: {
+                title: "TERMODINAMIKA & KALOR",
+                subtitle: "Sub-Sub-Kategori - Fisika Termal",
+                description: "Analisis energi panas, hukum kekekalan energi, dan aplikasinya pada sistem tertutup.",
+                pathString: "Arsip > Jalur Hidup > Sains > Termodinamika",
+                parent: "science_category",
+                choices: [
+                    { text: "🌡️ Kapasitas Kalor Spesifik Bahan", target: "specific_heat" },
+                    { text: "🌀 Hukum Ke-2 Termodinamika (Entropi)", target: "entropy_law" }
+                ]
+            },
+            specific_heat: {
+                title: "Kapasitas Kalor Spesifik",
+                subtitle: "Detail Fisika",
+                description: "Mengukur berapa besar energi panas ($Q$) yang dibutuhkan untuk menaikkan suhu suatu benda bermassa $m$ sebesar 1 derajat Celcius menggunakan rumus matematika: $Q = m \\cdot c \\cdot \\Delta T$.",
+                pathString: "Arsip > Jalur Hidup > Sains > Termo > Kalor Spesifik",
+                parent: "thermo_deep",
+                choices: []
+            },
+            entropy_law: {
+                title: "Hukum Entropi Semesta",
+                subtitle: "Ketidakteraturan Semesta",
+                description: "Bahwa panas mengalir secara alami dari area bersuhu tinggi ke area bersuhu rendah, meningkatkan tingkat keacakan (entropi) alam semesta secara konstan.",
+                pathString: "Arsip > Jalur Hidup > Sains > Termo > Entropi",
+                parent: "thermo_deep",
+                choices: []
+            },
+
+            // 3. Cabang Karakter 2D (Desain Visual)
+            character_deep: {
+                title: "KARAKTERISASI KARTUN 2D",
+                subtitle: "Sub-Sub-Kategori - Desain Karakter",
+                description: "Prinsip mendesain ilustrasi tokoh fiktif dengan gaya gambar yang konsisten dan ekspresif.",
+                pathString: "Arsip > Jalur Hidup > Kreatif > Karakter 2D",
+                parent: "creative_category",
+                choices: [
+                    { text: "✍️ Penggunaan Garis Tebal (Line Art)", target: "lineart_style" },
+                    { text: "🎨 Palet Warna Flat (Cell Shading)", target: "shading_style" }
+                ]
+            },
+            lineart_style: {
+                title: "Gaya Lineart Bersih",
+                subtitle: "Teknik Menggambar",
+                description: "Menggunakan goresan garis digital berukuran statis untuk memberikan kesan kartun klasik yang tegas, tegas, dan mudah dikenali.",
+                pathString: "Arsip > Jalur Hidup > Kreatif > Karakter > Lineart",
+                parent: "character_deep",
+                choices: []
+            },
+            shading_style: {
+                title: "Teknik Pewarnaan Cell-Shading",
+                subtitle: "Teknik Menggambar",
+                description: "Teknik pewarnaan tanpa gradasi halus, menghasilkan batas bayangan yang tajam layaknya komik Jepang klasik atau animasi modern.",
+                pathString: "Arsip > Jalur Hidup > Kreatif > Karakter > Shading",
+                parent: "character_deep",
+                choices: []
+            },
+
+            // === SILAKAN TAMBAHKAN PULUHAN CABANG BARU DI SINI ===
+            // Cukup ikuti pola penulisan: id: { title, subtitle, description, pathString, parent, choices: [] }
         };
 
-        // --- FASE 3: STATE ENGINE (LOGIKA NAVIGASI) ---
+        // --- FASE 3: MESIN PENGENDALI NAVIGASI (STATE ENGINE) ---
         let currentPathId = "root";
 
         function initPortfolio() {
@@ -240,34 +441,51 @@
             currentPathId = stateId;
             const state = treeData[stateId];
             
-            if (!state) return;
-
-            // Generate HTML untuk Pilihan (Choices)
-            let choicesHtml = "";
-            state.choices.forEach(choice => {
-                choicesHtml += `<button class="btn" onclick="renderState('${choice.target}')">${choice.text}</button>`;
-            });
-
-            // Generate Tombol Back (jika bukan halaman utama)
-            let backButtonHtml = "";
-            if (!state.isRoot && state.parent) {
-                backButtonHtml = `<button class="btn btn-back" onclick="renderState('${state.parent}')">⬅ KEMBALI</button>`;
+            if (!state) {
+                console.error("ID Cabang Tidak Ditemukan: " + stateId);
+                return;
             }
 
-            // Render ke layar dengan struktur Card yang rapi
+            // 1. Generate Breadcrumbs (Navigasi Jejak)
+            const breadcrumbHtml = `Jalur: <span>${state.pathString}</span>`;
+
+            // 2. Generate Pilihan Cabang (Jika ada)
+            let choicesHtml = "";
+            if (state.choices && state.choices.length > 0) {
+                state.choices.forEach(choice => {
+                    choicesHtml += `<button class="btn" onclick="renderState('${choice.target}')">${choice.text}</button>`;
+                });
+            } else {
+                // Jika tidak ada anak cabang lagi (Ujung daun/leaf node)
+                choicesHtml = `<p style="color: #888; font-style: italic; text-align: center; width: 100%;">-- Akhir dari arsip cabang ini. Silakan kembali untuk menjelajah jalur lain. --</p>`;
+            }
+
+            // 3. Generate Tombol Navigasi Bawah (Back & Home)
+            let controlButtonsHtml = "";
+            if (!state.isRoot) {
+                controlButtonsHtml += `<button class="btn-control btn-back" onclick="renderState('${state.parent}')">⬅ KEMBALI SEBELUMNYA</button>`;
+                controlButtonsHtml += `<button class="btn-control btn-home" onclick="renderState('root')">🏠 KE HALAMAN UTAMA</button>`;
+            }
+
+            // 4. Render Seluruh Struktur Card ke Layar
             app.innerHTML = `
                 <div class="card">
-                    <h3 class="highlight-cyan" style="font-size: 0.85rem; text-transform: uppercase;">// ${state.subtitle}</h3>
-                    <h1 class="highlight-blue" style="font-size: 1.8rem; margin-bottom: 15px;">${state.title}</h1>
-                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
+                    <div class="breadcrumbs">${breadcrumbHtml}</div>
+                    <div class="subtitle">// ${state.subtitle}</div>
+                    <h1>${state.title}</h1>
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px;">
                     <p>${state.description}</p>
                     
-                    <div class="btn-container">
+                    <div class="btn-grid">
                         ${choicesHtml}
-                        ${backButtonHtml}
                     </div>
+
+                    ${controlButtonsHtml ? `<div class="nav-footer">${controlButtonsHtml}</div>` : ''}
                 </div>
             `;
+
+            // Scroll otomatis ke atas layar setiap ganti menu agar nyaman di HP
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
 </body>
