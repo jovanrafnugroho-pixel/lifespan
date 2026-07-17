@@ -1,69 +1,274 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arsip Eksistensi</title>
+    <title>Arsip Eksistensi & Portofolio</title>
     <style>
+        /* Gaya Dasar Kosmik */
         body {
-            background-color: #000;
-            color: #fff;
+            background-color: #0b0b0f;
+            color: #f0f0f5;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            overflow: hidden;
-            cursor: pointer;
+            overflow-x: hidden;
             user-select: none;
         }
-        #status {
-            font-size: 1.2rem;
-            letter-spacing: 4px;
-            animation: pulse 2s infinite;
+
+        #app {
+            width: 90%;
+            max-width: 600px;
             text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
+
+        /* Status & teks berkedip */
+        .pulse {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            animation: pulse 2.5s infinite;
+            cursor: pointer;
+        }
+
         @keyframes pulse {
             0% { opacity: 0.3; }
             50% { opacity: 1; }
             100% { opacity: 0.3; }
         }
+
         .timeline-text {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            text-align: center;
             line-height: 1.6;
+            cursor: pointer;
+        }
+
+        /* Gaya Container Profil & Tree */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(4px);
+            text-align: left;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            letter-spacing: 1px;
+        }
+
+        .highlight-blue { color: #44aaff; }
+        .highlight-cyan { color: #00ffcc; }
+        .highlight-amber { color: #ffb300; }
+
+        p {
+            line-height: 1.6;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        /* Gaya Tombol Pilihan & Navigasi */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 18px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-align: left;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #00ffcc;
+            transform: translateX(5px);
+        }
+
+        .btn-back {
+            background: rgba(255, 50, 50, 0.1);
+            color: #ff5555;
+            border: 1px solid rgba(255, 50, 50, 0.3);
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 50, 50, 0.2);
+            border-color: #ff3333;
+            transform: none;
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <div id="status">[ KLIK LAYAR HP UNTUK MEMULAI KOSMOS ]</div>
+        <!-- Fase 1: Intro Timeline Kosmik (Interaksi klik di mana saja) -->
+        <div id="intro-container" class="pulse" onclick="nextIntroStep()">
+            [ KLIK LAYAR UNTUK MEMULAI KOSMOS ]
+        </div>
     </div>
+
     <script>
         const app = document.getElementById('app');
-        let step = 0;
-        app.addEventListener('click', () => {
-            if (step === 0) {
-                app.innerHTML = '<div class="timeline-text" style="color: #ff3333; font-size: 2.5rem;">* BIG BANG *</div>';
-                step++;
-            } else if (step === 1) {
-                app.innerHTML = '<div class="timeline-text" style="color: #44aaff;">Membentuk Bumi...<br><span style="font-size: 1rem; color: #888;">Time-lapse: 4,5 Miliar Tahun Berlalu</span></div>';
-                step++;
-            } else if (step === 2) {
+        
+        // --- FASE 1: TIMELINE INTRO ---
+        let introStep = 0;
+        function nextIntroStep() {
+            introStep++;
+            if (introStep === 1) {
                 app.innerHTML = `
-                    <div class="timeline-text">
+                    <div id="intro-container" class="timeline-text" style="color: #ff3333; font-size: 2.2rem;" onclick="nextIntroStep()">
+                        * BIG BANG *
+                    </div>`;
+            } else if (introStep === 2) {
+                app.innerHTML = `
+                    <div id="intro-container" class="timeline-text" onclick="nextIntroStep()">
+                        <span style="color: #44aaff;">Membentuk Bumi...</span><br>
+                        <span style="font-size: 1rem; color: #888;">Time-lapse: 4,5 Miliar Tahun Berlalu</span>
+                    </div>`;
+            } else if (introStep === 3) {
+                app.innerHTML = `
+                    <div id="intro-container" class="timeline-text" onclick="nextIntroStep()">
                         <span style="color: #00ffcc;">19 AGUSTUS 2008</span><br>
-                        <span style="font-size: 1.5rem;">Perjalanan Jiwa Dimulai.</span>
-                    </div>
-                `;
-                step++;
+                        <span style="font-size: 1.4rem; color: #fff;">Perjalanan Jiwa Dimulai.</span>
+                    </div>`;
             } else {
-                app.innerHTML = '<div id="status">[ Bersambung ke Umur Selanjutnya... Belajar Koding Dulu! ]</div>';
-                step = 0;
+                // Selesai intro, masuk ke Fase 2 (Profil & Tree)
+                initPortfolio();
             }
-        });
+        }
+
+        // --- FASE 2: INPUT DATA POHON PILIHAN (TREE DATA) ---
+        // Kamu bisa memodifikasi atau menambah pilihan hidup di sini sesukamu.
+        const treeData = {
+            // Halaman Utama Profil
+            root: {
+                title: "ARSIP EKSISTENSI",
+                subtitle: "Siswa SMA / Tech Enthusiast / Kreator Amatir",
+                description: "Menjelajahi dunia sains, baris kode, dan visualisasi karakter. Berdiri di persimpangan antara logika kalkulus dan imajinasi liar.",
+                choices: [
+                    { text: "📁 Lihat Pilihan Jalur Hidup (The Path)", target: "path_menu" },
+                    { text: "🛠️ Intip Skill & Teknologi", target: "skills" }
+                ],
+                isRoot: true
+            },
+            // Menu Cabang Jalur Hidup
+            path_menu: {
+                title: "PILIHAN JALUR HIDUP",
+                subtitle: "Persimpangan Realitas",
+                description: "Hidup adalah kumpulan dari pilihan-pilihan kecil yang bercabang. Ke mana fokus energi saat ini akan bermuara?",
+                choices: [
+                    { text: "📚 Jalur Akademik & Analitis (Sains/Fisika/IT)", target: "path_academic" },
+                    { text: "🎨 Jalur Kreatif & Seni Visual", target: "path_creative" }
+                ],
+                parent: "root"
+            },
+            // Cabang Akademik (Lvl 2)
+            path_academic: {
+                title: "LOGIKA & SAINS",
+                subtitle: "Mencari Kepastian di Semesta yang Acak",
+                description: "Tertarik pada bagaimana alam bekerja. Mulai dari mekanika klasik, hukum termodinamika, hingga logika pemrograman Python dan Web. Jalur ini menuntut dedikasi tinggi dan kopi yang cukup.",
+                choices: [
+                    { text: "⚛️ Eksplorasi Topik Sains yang Disukai", target: "science_detail" }
+                ],
+                parent: "path_menu"
+            },
+            science_detail: {
+                title: "Sains: Dari Kafein Hingga Kosmos",
+                subtitle: "Katalog Pengetahuan",
+                description: "Saat ini sedang mendalami bagaimana kafein memblokir adenosin di otak untuk mempertahankan fokus, sembari membedah persamaan gerak fisika. Pengetahuan adalah jangkar eksistensial.",
+                choices: [],
+                parent: "path_academic"
+            },
+            // Cabang Kreatif (Lvl 2)
+            path_creative: {
+                title: "VISUAL & IMAJINASI",
+                subtitle: "Melawan Kebosanan dengan Kanvas Digital",
+                description: "Sisi kanan otak yang menolak diam. Fokus pada pembuatan ilustrasi karakter 2D dengan gaya kartun yang bersih, tanpa elemen distopia yang berlebihan. Seni adalah cara mengabadikan pikiran.",
+                choices: [
+                    { text: "🎨 Filosofi Ilustrasi Kartun", target: "art_detail" }
+                ],
+                parent: "path_menu"
+            },
+            art_detail: {
+                title: "Filosofi Desain",
+                subtitle: "Estetika Garis dan Karakter",
+                description: "Menyukai ilustrasi kartun yang solid dan rapi. Bagi saya, karakter yang baik adalah karakter yang memiliki konsistensi detail—mulai dari struktur pakaian hingga ekspresi wajah.",
+                choices: [],
+                parent: "path_creative"
+            },
+            // Cabang Skill (Lvl 1)
+            skills: {
+                title: "STASIUN UTAMA",
+                subtitle: "Teknologi & Alat Tempur",
+                description: "Sedang dalam proses menguasai dasar-dasar pengembangan web (HTML/CSS/JS) untuk membangun platform interaktif, serta menggunakan logika matematika matriks untuk problem solving.",
+                choices: [],
+                parent: "root"
+            }
+        };
+
+        // --- FASE 3: STATE ENGINE (LOGIKA NAVIGASI) ---
+        let currentPathId = "root";
+
+        function initPortfolio() {
+            renderState("root");
+        }
+
+        function renderState(stateId) {
+            currentPathId = stateId;
+            const state = treeData[stateId];
+            
+            if (!state) return;
+
+            // Generate HTML untuk Pilihan (Choices)
+            let choicesHtml = "";
+            state.choices.forEach(choice => {
+                choicesHtml += `<button class="btn" onclick="renderState('${choice.target}')">${choice.text}</button>`;
+            });
+
+            // Generate Tombol Back (jika bukan halaman utama)
+            let backButtonHtml = "";
+            if (!state.isRoot && state.parent) {
+                backButtonHtml = `<button class="btn btn-back" onclick="renderState('${state.parent}')">⬅ KEMBALI</button>`;
+            }
+
+            // Render ke layar dengan struktur Card yang rapi
+            app.innerHTML = `
+                <div class="card">
+                    <h3 class="highlight-cyan" style="font-size: 0.85rem; text-transform: uppercase;">// ${state.subtitle}</h3>
+                    <h1 class="highlight-blue" style="font-size: 1.8rem; margin-bottom: 15px;">${state.title}</h1>
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
+                    <p>${state.description}</p>
+                    
+                    <div class="btn-container">
+                        ${choicesHtml}
+                        ${backButtonHtml}
+                    </div>
+                </div>
+            `;
+        }
     </script>
 </body>
 </html>
