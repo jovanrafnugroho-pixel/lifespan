@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arsip Eksistensi - Multi-level Decision Tree</title>
+    <title>Arsip Eksistensi x RPG Kehidupan</title>
     <style>
         /* Gaya Dasar Kosmik & Monospace */
         body {
@@ -232,202 +232,278 @@
             }
         }
 
-        // --- FASE 2: DATA POHON KEPUTUSAN MASIF (TREE DATA) ---
-        // Struktur: id_node: { title, subtitle, description, pathString, parent, choices: [{text, target}] }
+        // --- FASE 2: DATA POHON KEPUTUSAN MASIF (PORTFOLIO + GAME RPG) ---
         const treeData = {
             // === LEVEL 0: ROOT ===
             root: {
                 title: "ARSIP EKSISTENSI",
-                subtitle: "Sistem Navigasi Kehidupan",
-                description: "Selamat datang di ruang kendali memori dan pilihan. Dari sini, kamu bisa melacak percabangan keputusan, minat akademik, hingga filosofi seni yang membentuk eksistensi saat ini.",
+                subtitle: "Sistem Navigasi Utama",
+                description: "Selamat datang di ruang kendali eksistensi. Dari sini, kamu bisa melacak percabangan keputusan hidup, keahlian portofolio, atau masuk ke dalam simulator RPG Realitas.",
                 pathString: "Arsip",
                 choices: [
                     { text: "🧭 Jalur Pilihan Hidup (The Path)", target: "path_menu" },
-                    { text: "🛠️ Stasiun Keahlian & Teknologi", target: "skills_menu" }
+                    { text: "🛠️ Stasiun Keahlian & Teknologi", target: "skills_menu" },
+                    { text: "🎮 Mulai Game RPG Kehidupan", target: "rpg_root" }
                 ],
                 isRoot: true
             },
 
-            // === LEVEL 1: KATEGORI UTAMA 1 (JALUR HIDUP) ===
+            // ========================================================
+            // === BLOK PORTFOLIO (DARI KODE SEBELUMNYA) ===
+            // ========================================================
             path_menu: {
                 title: "PERSIMPANGAN JALUR HIDUP",
                 subtitle: "Kategori Utama - Alur Realitas",
-                description: "Setiap langkah kecil melahirkan percabangan tak terbatas. Di bawah ini adalah dua pilar utama penyeimbang hidup: Logika Analitis dan Kebebasan Kreatif.",
+                description: "Pilar penyeimbang eksistensi: Logika Analitis dan Kebebasan Kreatif.",
                 pathString: "Arsip > Jalur Hidup",
                 parent: "root",
                 choices: [
-                    { text: "📚 01. Eksplorasi Sains & Akademik", target: "science_category" },
-                    { text: "🎨 02. Eksplorasi Kreatif & Desain", target: "creative_category" }
+                    { text: "📚 Eksplorasi Sains & Akademik", target: "science_category" },
+                    { text: "🎨 Eksplorasi Kreatif & Desain", target: "creative_category" }
                 ]
             },
-
-            // === LEVEL 1: KATEGORI UTAMA 2 (SKILLS) ===
             skills_menu: {
                 title: "STASIUN KEAHLIAN",
                 subtitle: "Kategori Utama - Arsenal Tempur",
-                description: "Kumpulan tools, bahasa pemrograman, dan metodologi yang dipelajari untuk merekayasa masa depan dan memecahkan masalah nyata.",
+                description: "Kumpulan tools dan bahasa pemrograman yang dipelajari untuk merekayasa masa depan.",
                 pathString: "Arsip > Keahlian",
                 parent: "root",
                 choices: [
-                    { text: "💻 Kode & Logika (Programming)", target: "coding_sub" },
-                    { text: "🧮 Matematika Terapan & Analisis", target: "math_sub" }
+                    { text: "💻 Kode & Logika (Programming)", target: "coding_sub" }
                 ]
             },
-
-            // === LEVEL 2: SUB-KATEGORI (SAINS) ===
             science_category: {
-                title: "LOGIKA, FISIKA, & BIOLOGI",
+                title: "LOGIKA & SAINS",
                 subtitle: "Sub-Kategori - Eksplorasi Ilmiah",
-                description: "Menyelami hukum-hukum semesta yang mutlak. Silakan pilih sub-sub kategori di bawah untuk melihat teori mendalam yang sedang dieksplorasi.",
+                description: "Menyelami hukum semesta. Pilih sub-kategori untuk melihat teori yang sedang didalami.",
                 pathString: "Arsip > Jalur Hidup > Sains",
                 parent: "path_menu",
                 choices: [
-                    { text: "☕ Neurofarmakologi Kafein", target: "caffeine_deep" },
-                    { text: "🔥 Termodinamika & Kalor", target: "thermo_deep" },
-                    { text: "🌌 Kinematika & Gerak Semesta", target: "kinematics_deep" },
-                    { text: "📖 Sejarah Kolonial & Dampak Sosial", target: "history_deep" }
+                    { text: "☕ Neurofarmakologi Kafein", target: "caffeine_deep" }
                 ]
             },
-
-            // === LEVEL 2: SUB-KATEGORI (KREATIF) ===
-            creative_category: {
-                title: "SENI VISUAL & DESAIN",
-                subtitle: "Sub-Kategori - Katarsis Imajinatif",
-                description: "Menyeimbangkan otak kiri yang penuh angka dengan estetika visual garis tipis dan karakter kartun fiksi tanpa batasan.",
-                pathString: "Arsip > Jalur Hidup > Kreatif",
-                parent: "path_menu",
-                choices: [
-                    { text: "✏️ Pembuatan Karakter 2D Kartun", target: "character_deep" },
-                    { text: "📏 Konsistensi Desain Pakaian", target: "fashion_deep" },
-                    { text: "🚫 Filosofi Seni Tanpa Kekerasan", target: "peace_art_deep" }
-                ]
-            },
-
-            // === LEVEL 2: SUB-KATEGORI (CODING) ===
-            coding_sub: {
-                title: "BAHASA MESIN & ALGORITMA",
-                subtitle: "Sub-Kategori - Rekayasa Perangkat Lunak",
-                description: "Menerjemahkan ide abstrak menjadi instruksi biner yang dapat dieksekusi oleh mesin.",
-                pathString: "Arsip > Keahlian > Coding",
-                parent: "skills_menu",
-                choices: [
-                    { text: "🌐 Frontend Web (HTML/CSS/JS)", target: "frontend_deep" },
-                    { text: "🐍 Logika Python & Data Science", target: "python_deep" }
-                ]
-            },
-
-            // === LEVEL 2: SUB-KATEGORI (MATEMATIKA) ===
-            math_sub: {
-                title: "STRUKTUR MATEMATIKA",
-                subtitle: "Sub-Kategori - Pondasi Berpikir",
-                description: "Matematika bukanlah tentang menghitung angka cepat, melainkan melatih pola pikir runut untuk memecahkan ketidakpastian.",
-                pathString: "Arsip > Keahlian > Matematika",
-                parent: "skills_menu",
-                choices: [
-                    { text: "📐 Teori Matriks & Sistem Persamaan", target: "matrix_deep" },
-                    { text: "📈 Analisis Regresi & Prediksi Data", target: "regression_deep" }
-                ]
-            },
-
-            // === LEVEL 3: SUB-SUB-KATEGORI (PILIHAN DETAIL / DAFTAR BANYAK) ===
-            // 1. Cabang Kafein (Ada 5 Contoh Pilihan Bersarang Lagi di Sini)
             caffeine_deep: {
                 title: "NEUROFARMAKOLOGI KAFEIN",
-                subtitle: "Sub-Sub-Kategori - Kimia Tubuh",
-                description: "Mempelajari bagaimana zat kimia harian mempengaruhi kognisi dan fokus belajar di sekolah.",
+                subtitle: "Detail Seluler",
+                description: "Kafein menyamar sebagai molekul adenosin untuk menempel pada reseptor sel saraf di otak, sehingga mencegah rasa kantuk masuk secara biologis.",
                 pathString: "Arsip > Jalur Hidup > Sains > Kafein",
                 parent: "science_category",
-                choices: [
-                    { text: "🧠 Adenosin Reseptor Antagonis (Mekanisme)", target: "caffeine_mechanism" },
-                    { text: "⏱️ Siklus Paruh Waktu Kafein di Darah", target: "caffeine_half_life" },
-                    { text: "📉 Efek Crash Kafein Sore Hari", target: "caffeine_crash" }
-                ]
-            },
-            caffeine_mechanism: {
-                title: "Mekanisme Pemblokiran Reseptor",
-                subtitle: "Detail Seluler",
-                description: "Kafein menyamar sebagai molekul adenosin (zat pemicu rasa kantuk) untuk menempel pada reseptor sel saraf di otak, sehingga mencegah rasa kantuk masuk secara biologis.",
-                pathString: "Arsip > Jalur Hidup > Sains > Kafein > Mekanisme",
-                parent: "caffeine_deep",
                 choices: []
             },
-            caffeine_half_life: {
-                title: "Grafik Degradasi Waktu Paruh",
-                subtitle: "Farmakokinetika",
-                description: "Rata-rata kafein bertahan dengan waktu paruh 5 jam di dalam tubuh remaja sebelum akhirnya diproses sepenuhnya oleh organ hati.",
-                pathString: "Arsip > Jalur Hidup > Sains > Kafein > Waktu Paruh",
-                parent: "caffeine_deep",
+            creative_category: {
+                title: "SENI VISUAL & DESAIN",
+                subtitle: "Sub-Kategori - Kreatif",
+                description: "Mendesain ilustrasi tokoh fiktif dengan gaya gambar kartun 2D yang bersih dan konsisten.",
+                pathString: "Arsip > Jalur Hidup > Kreatif",
+                parent: "path_menu",
                 choices: []
             },
-            caffeine_crash: {
-                title: "Fenomena Kafein Crash",
-                subtitle: "Studi Batas Batas Energi",
-                description: "Saat efek kafein memudar, tumpukan adenosin yang tertahan di luar pintu reseptor akan langsung menyerbu masuk sekaligus, memicu rasa lelah yang ekstrem secara mendadak.",
-                pathString: "Arsip > Jalur Hidup > Sains > Kafein > Crash",
-                parent: "caffeine_deep",
+            coding_sub: {
+                title: "BAHASA MESIN",
+                subtitle: "Sub-Kategori - Frontend",
+                description: "Menguasai HTML, CSS, dan JavaScript dasar untuk membangun platform interaktif.",
+                pathString: "Arsip > Keahlian > Coding",
+                parent: "skills_menu",
                 choices: []
             },
 
-            // 2. Cabang Termodinamika
-            thermo_deep: {
-                title: "TERMODINAMIKA & KALOR",
-                subtitle: "Sub-Sub-Kategori - Fisika Termal",
-                description: "Analisis energi panas, hukum kekekalan energi, dan aplikasinya pada sistem tertutup.",
-                pathString: "Arsip > Jalur Hidup > Sains > Termodinamika",
-                parent: "science_category",
+            // ========================================================
+            // === BLOK BARU: GAME RPG KEHIDUPAN (DECISION TREE RPG) ===
+            // ========================================================
+            
+            // --- LEVEL 1 GAME: PILIH RAS ---
+            rpg_root: {
+                title: "CHARACTER CREATION",
+                subtitle: "Fase 1 - Pilih Ras Jiwamu",
+                description: "Di dunia fantasi ini, takdirmu ditentukan dari bentuk fisik awal. Setiap ras memiliki keunikan biologis dan sosiologis masing-masing. Pilih dengan bijak!",
+                pathString: "Arsip > RPG Game",
+                parent: "root",
                 choices: [
-                    { text: "🌡️ Kapasitas Kalor Spesifik Bahan", target: "specific_heat" },
-                    { text: "🌀 Hukum Ke-2 Termodinamika (Entropi)", target: "entropy_law" }
+                    { text: "🧑 Ras Manusia (Human)", target: "rpg_human" },
+                    { text: "👹 Ras Monster (Beast/Fiend)", target: "rpg_monster" },
+                    { text: "🧝 Ras Elf (Ancient Blood)", target: "rpg_elf" },
+                    { text: "🧔 Ras Dwarf (Mountain Clan)", target: "rpg_dwarf" }
                 ]
             },
-            specific_heat: {
-                title: "Kapasitas Kalor Spesifik",
-                subtitle: "Detail Fisika",
-                description: "Mengukur berapa besar energi panas ($Q$) yang dibutuhkan untuk menaikkan suhu suatu benda bermassa $m$ sebesar 1 derajat Celcius menggunakan rumus matematika: $Q = m \\cdot c \\cdot \\Delta T$.",
-                pathString: "Arsip > Jalur Hidup > Sains > Termo > Kalor Spesifik",
-                parent: "thermo_deep",
-                choices: []
+
+            // --- LEVEL 2 GAME: PILIH ROLE/CLASS BERDASARKAN RAS ---
+            
+            // 1. Cabang Manusia
+            rpg_human: {
+                title: "RAS MANUSIA",
+                subtitle: "Fase 2 - Pilih Kelas/Pekerjaan",
+                description: "Ras yang paling adaptif dengan pertumbuhan tercepat di dunia. Peradaban manusia dibangun di atas ilmu sihir, taktik militer, dan perdagangan ekonomi.",
+                pathString: "Arsip > RPG Game > Manusia",
+                parent: "rpg_root",
+                choices: [
+                    { text: "⚔️ Kesatria Pedang (Knight)", target: "rpg_human_knight" },
+                    { text: "🧙 Penyihir Agung (Mage)", target: "rpg_human_mage" },
+                    { text: "💰 Pedagang Antar Dimensi (Merchant)", target: "rpg_human_merchant" }
+                ]
             },
-            entropy_law: {
-                title: "Hukum Entropi Semesta",
-                subtitle: "Ketidakteraturan Semesta",
-                description: "Bahwa panas mengalir secara alami dari area bersuhu tinggi ke area bersuhu rendah, meningkatkan tingkat keacakan (entropi) alam semesta secara konstan.",
-                pathString: "Arsip > Jalur Hidup > Sains > Termo > Entropi",
-                parent: "thermo_deep",
+
+            // 2. Cabang Monster
+            rpg_monster: {
+                title: "RAS MONSTER",
+                subtitle: "Fase 2 - Pilih Keturunan Binatang",
+                description: "Mengutamakan kekuatan fisik mentah, insting berburu, dan manipulasi elemen alam. Ditakuti oleh ras-ras lemah.",
+                pathString: "Arsip > RPG Game > Monster",
+                parent: "rpg_root",
+                choices: [
+                    { text: "🟢 Goblin (Shadow Thief)", target: "rpg_monster_goblin" },
+                    { text: "🐗 Orc (Brutal Berserker)", target: "rpg_monster_orc" },
+                    { text: "🐉 Setengah Naga (Dragonoid)", target: "rpg_monster_dragonoid" }
+                ]
+            },
+
+            // 3. Cabang Elf
+            rpg_elf: {
+                title: "RAS ELF",
+                subtitle: "Fase 2 - Pilih Aliran Spiritual",
+                description: "Makhluk berumur panjang yang hidup selaras dengan alam gaib dan memiliki akurasi indra yang luar biasa.",
+                pathString: "Arsip > RPG Game > Elf",
+                parent: "rpg_root",
+                choices: [
+                    { text: "🏹 Pemanah Angin (Wind Ranger)", target: "rpg_elf_ranger" },
+                    { text: "🌿 Penyembuh Druid (Nature Druid)", target: "rpg_elf_druid" }
+                ]
+            },
+
+            // 4. Cabang Dwarf
+            rpg_dwarf: {
+                title: "RAS DWARF",
+                subtitle: "Fase 2 - Pilih Keahlian Tempa",
+                description: "Penghuni bawah gunung. Bertubuh pendek namun kekar, terkenal sebagai arsitek dan pembuat senjata legendaris.",
+                pathString: "Arsip > RPG Game > Dwarf",
+                parent: "rpg_root",
+                choices: [
+                    { text: "🔨 Penempa Besi (Blacksmith)", target: "rpg_dwarf_smith" },
+                    { text: "🛡️ Penjaga Benteng (Shield Warden)", target: "rpg_dwarf_warden" }
+                ]
+            },
+
+            // --- LEVEL 3 GAME: SUB-SUB PILIHAN (SPESIALISASI SENJATA / DETAIL AKHIR) ---
+
+            // Sub-sub Cabang Manusia Kesatria
+            rpg_human_knight: {
+                title: "SPESIALISASI KESATRIA",
+                subtitle: "Fase 3 - Pilih Gaya Bertarung",
+                description: "Bagaimana caramu mengayunkan besi dan mempertahankan kehormatan di medan perang?",
+                pathString: "Arsip > RPG Game > Manusia > Kesatria",
+                parent: "rpg_human",
+                choices: [
+                    { text: "🗡️ Longsword (Pedang Panjang klasik)", target: "spec_human_longsword" },
+                    { text: "⚔️ Dual Blade (Gaya Dua Pedang cepat)", target: "spec_human_dual" },
+                    { text: "👥 Assassin (Mengendap dari bayangan)", target: "spec_human_assassin" }
+                ]
+            },
+
+            // ========================================================
+            // === LEVEL 4: RINCIAN STATUS AKHIR (LEAF NODE / END STATS) ===
+            // ========================================================
+            
+            // Rincian Akhir Kesatria - Longsword
+            spec_human_longsword: {
+                title: "KESATRIA PEDANG PANJANG (LONGSWORD)",
+                subtitle: "Spesifikasi Karakter Final",
+                description: `
+                    <strong>[ STATUS DASAR ]</strong><br>
+                    ❤️ TOTAL HP : 850 / 850 (Tebal)<br>
+                    💧 TOTAL MP : 150 / 150 (Rendah)<br><br>
+                    <strong>[ KEUNGGULAN ]</strong><br>
+                    + Keseimbangan yang sangat baik antara daya serang dan pertahanan.<br>
+                    + Memiliki jangkauan tebasan area yang luas.<br><br>
+                    <strong>[ KEKURANGAN ]</strong><br>
+                    - Kecepatan serang tergolong lambat karena bobot pedang.<br>
+                    - Sangat bergantung pada stamina fisik, tidak memiliki sihir jarak jauh.
+                `,
+                pathString: "Arsip > RPG > Manusia > Kesatria > Longsword",
+                parent: "rpg_human_knight",
                 choices: []
             },
 
-            // 3. Cabang Karakter 2D (Desain Visual)
-            character_deep: {
-                title: "KARAKTERISASI KARTUN 2D",
-                subtitle: "Sub-Sub-Kategori - Desain Karakter",
-                description: "Prinsip mendesain ilustrasi tokoh fiktif dengan gaya gambar yang konsisten dan ekspresif.",
-                pathString: "Arsip > Jalur Hidup > Kreatif > Karakter 2D",
-                parent: "creative_category",
-                choices: [
-                    { text: "✍️ Penggunaan Garis Tebal (Line Art)", target: "lineart_style" },
-                    { text: "🎨 Palet Warna Flat (Cell Shading)", target: "shading_style" }
-                ]
-            },
-            lineart_style: {
-                title: "Gaya Lineart Bersih",
-                subtitle: "Teknik Menggambar",
-                description: "Menggunakan goresan garis digital berukuran statis untuk memberikan kesan kartun klasik yang tegas, tegas, dan mudah dikenali.",
-                pathString: "Arsip > Jalur Hidup > Kreatif > Karakter > Lineart",
-                parent: "character_deep",
-                choices: []
-            },
-            shading_style: {
-                title: "Teknik Pewarnaan Cell-Shading",
-                subtitle: "Teknik Menggambar",
-                description: "Teknik pewarnaan tanpa gradasi halus, menghasilkan batas bayangan yang tajam layaknya komik Jepang klasik atau animasi modern.",
-                pathString: "Arsip > Jalur Hidup > Kreatif > Karakter > Shading",
-                parent: "character_deep",
+            // Rincian Akhir Kesatria - Dual Blade
+            spec_human_dual: {
+                title: "KESATRIA DUA PEDANG (DUAL BLADE)",
+                subtitle: "Spesifikasi Karakter Final",
+                description: `
+                    <strong>[ STATUS DASAR ]</strong><br>
+                    ❤️ TOTAL HP : 600 / 600 (Sedang)<br>
+                    💧 TOTAL MP : 200 / 200 (Sedang)<br><br>
+                    <strong>[ KEUNGGULAN ]</strong><br>
+                    + DPS (Damage per Second) sangat tinggi berkat serangan bertubi-tubi.<br>
+                    + Mobilitas dan kemampuan menghindar (evade) sangat lincah.<br><br>
+                    <strong>[ KEKURANGAN ]</strong><br>
+                    - Tidak bisa menggunakan perisai, membuatnya rentan terkena counter attack.<br>
+                    - Daya rusak per satu kali tebasan kecil.
+                `,
+                pathString: "Arsip > RPG > Manusia > Kesatria > Dual Blade",
+                parent: "rpg_human_knight",
                 choices: []
             },
 
-            // === SILAKAN TAMBAHKAN PULUHAN CABANG BARU DI SINI ===
-            // Cukup ikuti pola penulisan: id: { title, subtitle, description, pathString, parent, choices: [] }
+            // Rincian Akhir Kesatria - Assassin
+            spec_human_assassin: {
+                title: "PEMBUNUH BAYANGAN (ASSASSIN)",
+                subtitle: "Spesifikasi Karakter Final",
+                description: `
+                    <strong>[ STATUS DASAR ]</strong><br>
+                    ❤️ TOTAL HP : 450 / 450 (Tipis)<br>
+                    💧 TOTAL MP : 350 / 350 (Tinggi - Untuk skill menghilang)<br><br>
+                    <strong>[ KEUNGGULAN ]</strong><br>
+                    + Serangan kritikal mematikan dari arah belakang (Stealth Backstab).<br>
+                    + Mampu mendeteksi jebakan dan bergerak tanpa suara.<br><br>
+                    <strong>[ KEKURANGAN ]</strong><br>
+                    - Pertahanan fisik sangat lemah, bisa mati dalam beberapa kali pukulan boss.<br>
+                    - Tidak efektif dalam pertempuran terbuka barisan depan.
+                `,
+                pathString: "Arsip > RPG > Manusia > Kesatria > Assassin",
+                parent: "rpg_human_knight",
+                choices: []
+            },
+
+            // Rincian Akhir Manusia - Penyihir Agung
+            rpg_human_mage: {
+                title: "PENYIHIR AGUNG (MAGE)",
+                subtitle: "Spesifikasi Karakter Final",
+                description: `
+                    <strong>[ STATUS DASAR ]</strong><br>
+                    ❤️ TOTAL HP : 350 / 350 (Sangat Tipis)<br>
+                    💧 TOTAL MP : 1200 / 1200 (Sangat Melimpah)<br><br>
+                    <strong>[ KEUNGGULAN ]</strong><br>
+                    + Menghancurkan pasukan musuh dari jarak jauh dengan sihir elemen (Api/Petir).<br>
+                    + Kapasitas energi (MP) terbesar untuk cast mantra terus-menerus.<br><br>
+                    <strong>[ KEKURANGAN ]</strong><br>
+                    - Membutuhkan waktu merapal mantra (casting time), menyebabkannya mudah diganggu musuh.<br>
+                    - Pertahanan fisik nol besar jika didekati petarung jarak dekat.
+                `,
+                pathString: "Arsip > RPG > Manusia > Mage",
+                parent: "rpg_human",
+                choices: []
+            },
+
+            // Rincian Akhir Monster - Setengah Naga
+            rpg_monster_dragonoid: {
+                title: "SETENGAH NAGA (DRAGONOID)",
+                subtitle: "Spesifikasi Karakter Final",
+                description: `
+                    <strong>[ STATUS DASAR ]</strong><br>
+                    ❤️ TOTAL HP : 1500 / 1500 (Raksasa)<br>
+                    💧 TOTAL MP : 500 / 500 (Sedang)<br><br>
+                    <strong>[ KEUNGGULAN ]</strong><br>
+                    + Kebal terhadap serangan elemen api dan memiliki kulit sisik sekeras baja.<br>
+                    + Memiliki serangan pamungkas napas naga (Dragon Breath) berskala masif.<br><br>
+                    <strong>[ KEKURANGAN ]</strong><br>
+                    - Ukuran tubuh besar membuatnya menjadi target empuk serangan musuh.<br>
+                    - Kecepatan regenerasi stamina lebih lambat dibanding ras manusia.
+                ` ,
+                pathString: "Arsip > RPG > Monster > Dragonoid",
+                parent: "rpg_monster",
+                choices: []
+            }
+            
+            // Catatan: Kamu bisa meneruskan cabang isi untuk Goblin, Orc, Merchant, Elf, dan Dwarf 
+            // dengan menyalin format di atas langsung di repository GitHub kamu nanti!
         };
 
         // --- FASE 3: MESIN PENGENDALI NAVIGASI (STATE ENGINE) ---
@@ -446,7 +522,7 @@
                 return;
             }
 
-            // 1. Generate Breadcrumbs (Navigasi Jejak)
+            // 1. Generate Breadcrumbs
             const breadcrumbHtml = `Jalur: <span>${state.pathString}</span>`;
 
             // 2. Generate Pilihan Cabang (Jika ada)
@@ -456,8 +532,7 @@
                     choicesHtml += `<button class="btn" onclick="renderState('${choice.target}')">${choice.text}</button>`;
                 });
             } else {
-                // Jika tidak ada anak cabang lagi (Ujung daun/leaf node)
-                choicesHtml = `<p style="color: #888; font-style: italic; text-align: center; width: 100%;">-- Akhir dari arsip cabang ini. Silakan kembali untuk menjelajah jalur lain. --</p>`;
+                choicesHtml = `<p style="color: #888; font-style: italic; text-align: center; width: 100%;">-- Desain Karakter Selesai. Siap Berpetualang di Realitas Semesta. --</p>`;
             }
 
             // 3. Generate Tombol Navigasi Bawah (Back & Home)
@@ -484,7 +559,6 @@
                 </div>
             `;
 
-            // Scroll otomatis ke atas layar setiap ganti menu agar nyaman di HP
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
